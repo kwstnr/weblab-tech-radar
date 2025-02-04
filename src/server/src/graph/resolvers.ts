@@ -1,4 +1,4 @@
-import { books } from '../data/books.js';
+import { books } from '../data/books';
 
 export const resolvers = {
   Query: {
