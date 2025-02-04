@@ -1,0 +1,129 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-error.log
+pnpm-debug.log
+
+# TypeScript compiled output
+dist/
+out/
+build/
+tmp/
+temp/
+coverage/
+
+# Angular specific
+.angular/
+.angular-cache/
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE and editor specific
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+
+# Logs
+logs/
+*.log
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Dependencies in nested workspaces (for monorepo)
+src/**/node_modules/
+
+# Generated files
+*.bak
+*.orig
+*.rej
+*.DS_Store
+Thumbs.db
+*.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Git hooks
+.husky/
+
+# Server specific
+src/server/.cache/
+src/server/.next/
+src/server/.nuxt/
+src/server/prisma/migrations/
+src/server/prisma/dev.db
+
+# Frontend specific
+src/app/.cache/
+src/app/.angular/
+src/app/.eslintcache/
+src/app/.sass-cache/
+src/app/.parcel-cache/
+src/app/.turbo/
+src/app/.vite/
+
+# Docker specific
+docker-compose.override.yml
+docker-compose.override.yaml
+.dockerignore
+
+# Jest & Testing
+jest.config.js
+jest.config.ts
+jest.setup.js
+jest.setup.ts
+jest-cache/
+src/server/jest/
+src/app/jest/
+
+# Kubernetes
+.kube/
+helm-release.yaml
+terraform.tfstate
+terraform.tfstate.backup
+
+# Linting & Formatting
+.prettier/
+.prettierignore
+.eslintcache
+.eslintignore
+.stylelintcache
+.stylelintignore
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# Angular .gitignore
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+src/app/dist
+src/app/tmp
+src/app/out-tsc
+src/app/bazel-out
+
+# Node
+src/app/node_modules
+src/app/npm-debug.log
+src/app/yarn-error.log
+
+# Miscellaneous
+src/app/.angular/cache
+src/app/.sass-cache/
+src/app/connect.lock
+src/app/coverage
+src/app/libpeerconnection.log
+src/app/testem.log
+src/app/typings
+
