@@ -1,0 +1,65 @@
+@startuml
+
+title MessageProducer Class Diagram
+
+class Technology {
+  + Id: UUID
+  + Name: String
+  + Description: String
+  + Category: Category
+  + Circle: Circle?
+  + CircleDescription: String?
+  + Status: TechnologyStatus
+  + Changed: DateTime?
+  + Published: DateTime?
+  + Created: DateTime
+}
+
+class User {
+  + Id: UUID
+  + Name: String
+  + Email: String
+  + Password: String <hashed>
+  + Role: Role
+}
+
+class AdminLoginLogs {
+  + Id: UUID
+  + UserId: UUID
+  + Timestamp: DateTime
+}
+
+enum Role {
+  EMPLOYEE
+  ADMIN
+}
+
+enum Category {
+  TECHNIQUES
+  TOOLS
+  PLATFORMS
+  LANGUAGES
+  FRAMEWORKS
+}
+
+enum Circle {
+  ASSESS
+  TRIAL
+  ADOPT
+  HOLD
+}
+
+enum TechnologyStatus {
+  DRAFTED
+  PUBLISHED
+}
+
+Technology --> Category
+Technology --> Circle
+Technology --> TechnologyStatus
+
+User --> Role
+
+AdminLoginLogs --> User
+@enduml
+
