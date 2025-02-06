@@ -1,5 +1,8 @@
 import mongoose, { Model } from 'mongoose';
+import { v4 as uuidv4 } from 'uuid';
 
+import { users } from '../seed';
+import { hashPassword } from '../../../utils';
 import { User, Technology } from '../model';
 import { UserSchema, TechnologySchema } from '../schema';
 
@@ -8,7 +11,7 @@ export class DbContext {
 
   private _users?: Model<User>;
 
-  constructor(private connectionString: string) {}
+  constructor(private connectionString: string, private testPassword: string) {}
 
   private async connectToDatabase(): Promise<void> {
     try {
@@ -19,6 +22,32 @@ export class DbContext {
     } catch (error) {
       console.error('Error connecting to MongoDB', error);
       process.exit(1);
+    }
+  }
+
+  private async seedTestUsers(): Promise<void> {
+    if (!this._users) {
+      console.error('Error seeding users, user model is not initialized.');
+      process.exit(1);
+    }
+
+    const existingUser = await this._users.findOne({ name: 'Mitarbeiter' });
+    if (existingUser != undefined) {
+      console.log('Users already seeded, aborting');
+      return;
+    }
+    
+    try {
+      users.forEach((user: Omit<User, "id" | "password">) => {
+        const newUser = new this._users!({
+          ...user,
+          id: uuidv4(),
+          password: hashPassword(this.testPassword),
+        });
+        newUser.save();
+      });
+    } catch (error) {
+      console.error('Error seeding users: ', error);
     }
   }
 
@@ -43,5 +72,7 @@ export class DbContext {
 
     this._technologies = mongoose.model<Technology>('Technology', TechnologySchema);
     this._users = mongoose.model<User>('User', UserSchema);
+
+    await this.seedTestUsers();
   }
 }

@@ -23,6 +23,7 @@ The server also needs a set of environment variables.
 Create a .env file in the `src/server` repository and add the db connection string, i.e.
 ```
 DATABASE_URI=mongodb://root:password@localhost:27017/tech-radar
+TEST_PASSWORD=TEST_123
 ```
 
 from the root of the repository run:

@@ -17,7 +17,15 @@ if (!connectionString) {
   process.exit(1);
 }
 
-const dbContextFactory = new DbContextFactory(connectionString);
+const testPassword = process.env.TEST_PASSWORD;
+
+if (!testPassword) {
+  console.error('No Test Password set in environment variables');
+  process.exit(1);
+}
+
+
+const dbContextFactory = new DbContextFactory(connectionString, testPassword);
 
 const server = new ApolloServer({
   typeDefs,
