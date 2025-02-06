@@ -31,6 +31,10 @@ export class DbContext {
     return technologies ?? [];
   }
 
+  async getTechnologyById(id: string): Promise<ITechnology | null | undefined> {
+    return await this.technologies?.findOne({ _id: id });
+  }
+
   async saveTechnology(technology: Partial<ITechnology>): Promise<ITechnology | null> {
     if (!this.technologies) {
       console.error('Technology model is not initialized.');
