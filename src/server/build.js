@@ -12,5 +12,6 @@ build({
     '@apollo/server',
     'mongoose',
     'dotenv',
+    'uuid',
   ],
 }).catch(() => process.exit(1));

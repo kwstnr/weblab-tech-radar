@@ -6,10 +6,7 @@ export const TechnologySchema = new Schema<ITechnology>({
   name: { type: String, required: true },
   description: { type: String, required: true },
   category: { type: Number, required: true },
-  circle: {
-    type: String,
-    enum: ['ASSESS', 'TRIAL', 'ADOPT', 'HOLD'],
-  },
+  circle: { type: Number },
   circleDescription: { type: String },
   status: { type: Number, required: true },
   changed: { type: Date },

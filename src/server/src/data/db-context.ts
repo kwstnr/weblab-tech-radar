@@ -1,4 +1,5 @@
 import mongoose, { Model } from 'mongoose';
+import { v4 as uuidv4 } from 'uuid';
 
 import { ITechnology } from './model/itechnology';
 import { TechnologySchema } from './schema/technology.schema';
@@ -44,32 +45,51 @@ export class DbContext {
     return await this.technologies?.findOne({ _id: id });
   }
 
-  async saveTechnology(technology: Partial<ITechnology>): Promise<ITechnology | null> {
+  async addTechnology(technology: Partial<Omit<ITechnology, "id">>): Promise<ITechnology | null> {
     if (!this.technologies) {
       console.error('Technology model is not initialized.');
       return null;
     }
 
     try {
-      const existingTechnology = await this.technologies.findOne({ _id: technology.id });
-
-      if (existingTechnology) {
-        const updatedTechnology = await this.technologies.findOneAndUpdate(
-          { _id: technology.id },
-          technology,
-          { new: true }
-        );
-        console.log(`Updated Technology: ${updatedTechnology}`);
-        return updatedTechnology;
-      } else {
-        const newTechnology = new this.technologies(technology);
-        await newTechnology.save();
-        console.log(`Created New Technology: ${newTechnology}`);
-        return newTechnology;
-      }
+      const newTechnology = new this.technologies({
+        id: uuidv4(),
+        ...technology,
+      });
+      await newTechnology.save();
+      return newTechnology;
     } catch (error) {
-      console.error('Error saving technology:', error);
+      console.error('Error saving technology: ', error);
       return null;
     }
   }
+
+//  async saveTechnology(technology: Partial<ITechnology>): Promise<ITechnology | null> {
+//    if (!this.technologies) {
+//      console.error('Technology model is not initialized.');
+//      return null;
+//    }
+//
+//    try {
+//      const existingTechnology = await this.technologies.findOne({ _id: technology.id });
+//
+//      if (existingTechnology) {
+//        const updatedTechnology = await this.technologies.findOneAndUpdate(
+//          { _id: technology.id },
+//          technology,
+//          { new: true }
+//        );
+//        console.log(`Updated Technology: ${updatedTechnology}`);
+//        return updatedTechnology;
+//      } else {
+//        const newTechnology = new this.technologies(technology);
+//        await newTechnology.save();
+//        console.log(`Created New Technology: ${newTechnology}`);
+//        return newTechnology;
+//      }
+//    } catch (error) {
+//      console.error('Error saving technology:', error);
+//      return null;
+//    }
+//  }
 }

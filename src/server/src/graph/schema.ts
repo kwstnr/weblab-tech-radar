@@ -10,16 +10,29 @@ export const typeDefs = `#graphql
     technologyById(id: String): Technology
   }
 
+  type Mutation {
+    createTechnology(input: CreateTechnologyInput): Technology
+  }
+
   type Technology {
     id: String
     name: String
     description: String
-    category: String
-    circle: String
+    category: Int
+    circle: Int
     circleDescription: String
-    status: String
+    status: Int
     created: String
     published: String
     changed: String
+  }
+
+  input CreateTechnologyInput {
+    name: String
+    description: String
+    category: Int
+    circle: Int
+    circleDescription: String
+    status: Int
   }
 `;
