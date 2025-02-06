@@ -26,7 +26,7 @@ export class DbContext {
     this.technologies = mongoose.model<ITechnology>('Technology', TechnologySchema);
   }
 
-  async getAllTechnologies(): Promise<ITechnology[]> {
+  async getTechnologies(): Promise<ITechnology[]> {
     const technologies = await this.technologies?.find();
     return technologies ?? [];
   }
