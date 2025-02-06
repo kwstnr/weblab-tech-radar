@@ -45,7 +45,7 @@ export class DbContext {
     return await this.technologies?.findOne({ _id: id });
   }
 
-  async addTechnology(technology: Partial<Omit<Technology, "id">>): Promise<Technology | null> {
+  async addTechnology(technology: Omit<Technology, "id">): Promise<Technology | null> {
     if (!this.technologies) {
       console.error('Technology model is not initialized.');
       return null;

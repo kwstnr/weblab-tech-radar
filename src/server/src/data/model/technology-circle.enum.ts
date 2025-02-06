@@ -1,6 +1,6 @@
 export enum TechnologyCircle {
-  ASSESS,
-  TRIAL,
-  ADOPT,
-  HOLD
+  ASSESS = "ASSESS",
+  TRIAL = "TRIAL",
+  ADOPT = "ADOPT",
+  HOLD = "HOLD"
 }
