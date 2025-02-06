@@ -1,9 +1,8 @@
 import { Schema, Document } from 'mongoose';
 
-import { getEnumValues } from '../../../utils/get-enum-values';
+import { getEnumValues } from '../../../utils';
 
-import { User } from '../model/user.type';
-import { Role } from '../model/role.enum';
+import { User, Role } from '../model';
 
 export const UserSchema = new Schema<User & Document>({
   _id: { type: String, required: true, alias: 'id' },

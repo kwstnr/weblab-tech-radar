@@ -5,9 +5,8 @@ import dotenv from 'dotenv';
 import { resolvers } from "./graph/resolvers";
 import { typeDefs } from "./graph/schema";
 
-import { DbContextFactory } from './data/db-context.factory';
-import { TechnologyService } from './data/service/technology.service';
-import { UserService } from './data/service/user.service';
+import { DbContextFactory } from './data/db';
+import { TechnologyService, UserService } from './data/service';
 
 dotenv.config();
 

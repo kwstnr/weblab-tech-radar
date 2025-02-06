@@ -1,10 +1,7 @@
 import mongoose, { Model } from 'mongoose';
 
-import { User } from './model/user.type';
-import { UserSchema } from './schema/user.schema';
-
-import { Technology } from './model/technology.type';
-import { TechnologySchema } from './schema/technology.schema';
+import { User, Technology } from '../model';
+import { UserSchema, TechnologySchema } from '../schema';
 
 export class DbContext {
   private _technologies?: Model<Technology>;

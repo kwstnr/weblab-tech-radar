@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { DbContext } from '../db-context';
-import { Technology } from '../model/technology.type';
+import { DbContext } from '../db';
+import { Technology } from '../model';
 
 export class TechnologyService {
   constructor(private context: DbContext) {}

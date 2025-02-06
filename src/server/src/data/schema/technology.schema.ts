@@ -1,11 +1,13 @@
 import { Schema, Document } from 'mongoose';
 
-import { getEnumValues } from '../../../utils/get-enum-values';
+import { getEnumValues } from '../../../utils';
 
-import { Technology } from '../model/technology.type';
-import { TechnologyCategory } from '../model/technology-category.enum';
-import { TechnologyCircle } from '../model/technology-circle.enum';
-import { TechnologyStatus } from '../model/technology-status.enum';
+import {
+  Technology,
+  TechnologyCategory,
+  TechnologyCircle,
+  TechnologyStatus,
+} from '../model';
 
 export const TechnologySchema = new Schema<Technology & Document>({
   _id: { type: String, required: true, alias: 'id' },

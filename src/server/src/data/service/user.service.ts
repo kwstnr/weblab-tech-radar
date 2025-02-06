@@ -1,9 +1,9 @@
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { hashPassword } from '../../../utils/password-hashing';
-import { DbContext } from '../db-context';
-import { User } from '../model/user.type';
+import { hashPassword } from '../../../utils';
+import { DbContext } from '../db';
+import { User } from '../model';
 
 export class UserService {
   constructor(private context: DbContext) {}
