@@ -4,7 +4,7 @@ import { TechnologyCategory } from './technology-category.enum';
 import { TechnologyCircle } from './technology-circle.enum';
 import { TechnologyStatus } from './technology-status.enum';
 
-export interface ITechnology extends Document {
+export interface Technology extends Document {
   id: string;
   name: string;
   description: string;

@@ -1,11 +1,11 @@
 import mongoose, { Model } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
-import { ITechnology } from './model/itechnology';
+import { Technology } from './model/technology.type';
 import { TechnologySchema } from './schema/technology.schema';
 
 export class DbContext {
-  private technologies?: Model<ITechnology>;
+  private technologies?: Model<Technology>;
 
   constructor(private connectionString: string) {}
 
@@ -24,10 +24,10 @@ export class DbContext {
   async init(): Promise<void> {
     await this.connectToDatabase();
 
-    this.technologies = mongoose.model<ITechnology>('Technology', TechnologySchema);
+    this.technologies = mongoose.model<Technology>('Technology', TechnologySchema);
   }
 
-  async getTechnologies(): Promise<ITechnology[]> {
+  async getTechnologies(): Promise<Technology[]> {
     if (!this.technologies) {
       console.error('Technology model is not initialized.');
     }
@@ -36,7 +36,7 @@ export class DbContext {
     return technologies ?? [];
   }
 
-  async getTechnologyById(id: string): Promise<ITechnology | null | undefined> {
+  async getTechnologyById(id: string): Promise<Technology | null | undefined> {
     if (!this.technologies) {
       console.error('Technology model is not initialized.');
       return null;
@@ -45,7 +45,7 @@ export class DbContext {
     return await this.technologies?.findOne({ _id: id });
   }
 
-  async addTechnology(technology: Partial<Omit<ITechnology, "id">>): Promise<ITechnology | null> {
+  async addTechnology(technology: Partial<Omit<Technology, "id">>): Promise<Technology | null> {
     if (!this.technologies) {
       console.error('Technology model is not initialized.');
       return null;

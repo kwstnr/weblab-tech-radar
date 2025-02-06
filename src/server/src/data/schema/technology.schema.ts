@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
-import { ITechnology } from '../model/itechnology';
+import { Technology } from '../model/technology.type';
 
-export const TechnologySchema = new Schema<ITechnology>({
+export const TechnologySchema = new Schema<Technology>({
   _id: { type: String, required: true, alias: 'id' },
   name: { type: String, required: true },
   description: { type: String, required: true },
