@@ -9,7 +9,6 @@ build({
   outdir: 'dist',
   sourcemap: true,
   external: [
-    'apollo-server',
     '@apollo/server',
     'mongoose',
     'dotenv',
