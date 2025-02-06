@@ -1,13 +1,14 @@
-import { technologies } from './resolvers/technologies/technologies.resolver';
-import { technologyById } from './resolvers/technologies/technology-by-id.resolver';
-import { createTechnology } from './mutations/technologies/create-technology.mutation';
+import { queries } from './queries';
+import { mutations } from './mutations';
+import { Resolver } from './resolver.type';
 
 export const resolvers = {
-  Query: {
-    technologies,
-    technologyById,
-  },
-  Mutation: {
-    createTechnology,
-  }
+  Query: queries.reduce((acc, resolver: Resolver) => ({
+    ...acc,
+    [resolver.name]: resolver.function,
+  }), {}),
+  Mutation: mutations.reduce((acc, resolver: Resolver) => ({
+    ...acc,
+    [resolver.name]: resolver.function,
+  }), {}),
 };
