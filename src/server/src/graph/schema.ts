@@ -6,6 +6,7 @@ export const typeDefs = `#graphql
 
   type Mutation {
     createTechnology(input: CreateTechnologyInput): Technology
+    login(input: LoginInput): LoginOutput
   }
 
   type Technology {
@@ -19,6 +20,16 @@ export const typeDefs = `#graphql
     created: String
     published: String
     changed: String
+  }
+
+  type LoginOutput {
+    successful: Boolean
+    jwtToken: String
+  }
+
+  input LoginInput {
+    email: String
+    password: String
   }
 
   input CreateTechnologyInput {

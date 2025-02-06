@@ -1,6 +1,6 @@
 import { User, Role } from '../model';
 
-export const users: Omit<User, "id" | "password">[] = [
+export const users: Omit<User, "id" | "password" | "salt">[] = [
   {
     name: 'Mitarbeiter',
     email: 'mitarbeiter@company.com',

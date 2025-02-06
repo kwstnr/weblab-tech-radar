@@ -9,6 +9,7 @@ export const UserSchema = new Schema<User & Document>({
   name: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  salt: { type: String, required: true },
   role: {
     type: String,
     enum: getEnumValues(Role),

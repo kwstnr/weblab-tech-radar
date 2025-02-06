@@ -14,5 +14,6 @@ build({
     'dotenv',
     'uuid',
     'bcrypt-ts',
+    'jsonwebtoken',
   ],
 }).catch(() => process.exit(1));

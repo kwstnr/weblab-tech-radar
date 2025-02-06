@@ -1,8 +1,8 @@
 import mongoose, { Model } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
+import { genSaltSync, hashSync } from 'bcrypt-ts';
 
 import { users } from '../seed';
-import { hashPassword } from '../../../utils';
 import { User, Technology } from '../model';
 import { UserSchema, TechnologySchema } from '../schema';
 
@@ -38,11 +38,13 @@ export class DbContext {
     }
     
     try {
-      users.forEach((user: Omit<User, "id" | "password">) => {
+      users.forEach((user: Omit<User, "id" | "password" | "salt">) => {
+        const salt = genSaltSync(10);
         const newUser = new this._users!({
           ...user,
           id: uuidv4(),
-          password: hashPassword(this.testPassword),
+          salt,
+          password: hashSync(this.testPassword, salt),
         });
         newUser.save();
       });
