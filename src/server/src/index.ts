@@ -2,8 +2,10 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import dotenv from 'dotenv';
 
-import { getResolvers } from "./graph/resolvers";
+import { resolvers } from "./graph/resolvers";
 import { typeDefs } from "./graph/schema";
+
+import { DbContextFactory } from './data/db-context.factory';
 
 dotenv.config();
 
@@ -14,7 +16,7 @@ if (!connectionString) {
   process.exit(1);
 }
 
-const resolvers = getResolvers(connectionString);
+const dbContextFactory = new DbContextFactory(connectionString);
 
 const server = new ApolloServer({
   typeDefs,
@@ -23,6 +25,9 @@ const server = new ApolloServer({
 
 const { url } = await startStandaloneServer(server, {
   listen: { port: 4000 },
+  context: async () => ({
+    dbContext: await dbContextFactory.getDbContext()
+  })
 });
 
 console.log(`Server ready at: ${url}`);
