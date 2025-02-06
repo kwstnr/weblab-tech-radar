@@ -12,6 +12,11 @@ export const getResolvers = (connectionString: string) => {
         const dbContext = await dbContextFactory.getDbContext();
         return await dbContext.getTechnologies();
       },
+
+      technologyById: async (parent, { id }, ctx, info) => {
+        const dbContext = await dbContextFactory.getDbContext();
+        return await dbContext.getTechnologyById(id);
+      }
     },
   };
 };

@@ -7,6 +7,7 @@ export const typeDefs = `#graphql
   type Query {
     books: [Book]
     technologies: [Technology]
+    technologyById(id: String): Technology
   }
 
   type Technology {
