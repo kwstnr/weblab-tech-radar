@@ -8,5 +8,10 @@ build({
   target: 'es2022',
   outdir: 'dist',
   sourcemap: true,
-  external: ['apollo-server', '@apollo/server'],
+  external: [
+    'apollo-server',
+    '@apollo/server',
+    'mongoose',
+    'dotenv',
+  ],
 }).catch(() => process.exit(1));

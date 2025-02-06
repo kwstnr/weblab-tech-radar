@@ -19,6 +19,12 @@ from the root of the repository both of these commands:
 `cd src/app && yarn`
 
 ## Start server
+The server also needs a set of environment variables.
+Create a .env file in the `src/server` repository and add the db connection string, i.e.
+```
+DATABASE_URI=mongodb://root:password@localhost:27017/tech-radar
+```
+
 from the root of the repository run:
 `cd src/server && npm start`
 
