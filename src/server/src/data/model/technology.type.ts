@@ -1,10 +1,8 @@
-import { Document } from 'mongoose';
-
 import { TechnologyCategory } from './technology-category.enum';
 import { TechnologyCircle } from './technology-circle.enum';
 import { TechnologyStatus } from './technology-status.enum';
 
-export interface Technology extends Document {
+export interface Technology {
   id: string;
   name: string;
   description: string;
@@ -16,3 +14,4 @@ export interface Technology extends Document {
   published?: Date;
   changed?: Date;
 }
+
