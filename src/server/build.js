@@ -13,5 +13,6 @@ build({
     'mongoose',
     'dotenv',
     'uuid',
+    'bcrypt-ts',
   ],
 }).catch(() => process.exit(1));
