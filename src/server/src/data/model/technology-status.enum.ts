@@ -1,4 +1,4 @@
 export enum TechnologyStatus {
-  Drafted,
-  Published
+  DRAFTED,
+  PUBLISHED
 }

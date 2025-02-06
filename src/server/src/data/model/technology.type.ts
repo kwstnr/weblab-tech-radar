@@ -6,10 +6,10 @@ export interface Technology {
   id: string;
   name: string;
   description: string;
-  category: TechnologyCategory;
+  category?: TechnologyCategory;
   circle?: TechnologyCircle;
   circleDescription?: string;
-  status: TechnologyStatus;
+  status?: TechnologyStatus;
   created: Date;
   published?: Date;
   changed?: Date;

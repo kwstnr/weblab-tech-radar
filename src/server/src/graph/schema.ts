@@ -18,10 +18,10 @@ export const typeDefs = `#graphql
     id: String
     name: String
     description: String
-    category: Int
-    circle: Int
+    category: String
+    circle: String
     circleDescription: String
-    status: Int
+    status: String
     created: String
     published: String
     changed: String
@@ -30,9 +30,9 @@ export const typeDefs = `#graphql
   input CreateTechnologyInput {
     name: String
     description: String
-    category: Int
-    circle: Int
+    category: String
+    circle: String
     circleDescription: String
-    status: Int
+    status: String
   }
 `;
