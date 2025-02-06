@@ -30,4 +30,33 @@ export class DbContext {
     const technologies = await this.technologies?.find();
     return technologies ?? [];
   }
+
+  async saveTechnology(technology: Partial<ITechnology>): Promise<ITechnology | null> {
+    if (!this.technologies) {
+      console.error('Technology model is not initialized.');
+      return null;
+    }
+
+    try {
+      const existingTechnology = await this.technologies.findOne({ _id: technology.id });
+
+      if (existingTechnology) {
+        const updatedTechnology = await this.technologies.findOneAndUpdate(
+          { _id: technology.id },
+          technology,
+          { new: true }
+        );
+        console.log(`Updated Technology: ${updatedTechnology}`);
+        return updatedTechnology;
+      } else {
+        const newTechnology = new this.technologies(technology);
+        await newTechnology.save();
+        console.log(`Created New Technology: ${newTechnology}`);
+        return newTechnology;
+      }
+    } catch (error) {
+      console.error('Error saving technology:', error);
+      return null;
+    }
+  }
 }
