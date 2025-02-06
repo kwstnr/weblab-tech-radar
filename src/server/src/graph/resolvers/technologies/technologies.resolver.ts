@@ -1,6 +1,6 @@
 import { DbContext } from '../../../data/db-context';
 import { Technology } from '../../../data/model/technology.type';
 
-export async function getTechnologies(context: DbContext): Promise<Technology[]> {
-  return await context.getTechnologies();
+export async function technologies(_: any, __: any, { dbContext }: { dbContext: DbContext }): Promise<Technology[]> {
+  return await dbContext.getTechnologies();
 }
