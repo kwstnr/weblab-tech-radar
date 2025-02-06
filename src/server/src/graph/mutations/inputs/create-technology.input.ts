@@ -1,6 +1,4 @@
-import { TechnologyCategory } from '../../../data/model/technology-category.enum';
-import { TechnologyCircle } from '../../../data/model/technology-circle.enum';
-import { TechnologyStatus } from '../../../data/model/technology-status.enum';
+import { TechnologyCategory, TechnologyCircle, TechnologyStatus } from '../../../data/model';
 
 export interface CreateTechnologyInput {
   name: string;
