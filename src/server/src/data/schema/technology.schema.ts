@@ -1,13 +1,13 @@
-import { Schema } from 'mongoose';
+import { Schema, Document } from 'mongoose';
 
 import { getEnumValues } from '../../../utils/get-enum-values';
 
-import { TechnologySchemaType } from './type/technology.schema.type';
+import { Technology } from '../model/technology.type';
 import { TechnologyCategory } from '../model/technology-category.enum';
 import { TechnologyCircle } from '../model/technology-circle.enum';
 import { TechnologyStatus } from '../model/technology-status.enum';
 
-export const TechnologySchema = new Schema<TechnologySchemaType>({
+export const TechnologySchema = new Schema<Technology & Document>({
   _id: { type: String, required: true, alias: 'id' },
   name: { type: String, required: true },
   description: { type: String, required: true },
