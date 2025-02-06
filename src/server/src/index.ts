@@ -6,6 +6,8 @@ import { resolvers } from "./graph/resolvers";
 import { typeDefs } from "./graph/schema";
 
 import { DbContextFactory } from './data/db-context.factory';
+import { TechnologyService } from './data/service/technology.service';
+import { UserService } from './data/service/user.service';
 
 dotenv.config();
 
@@ -25,9 +27,13 @@ const server = new ApolloServer({
 
 const { url } = await startStandaloneServer(server, {
   listen: { port: 4000 },
-  context: async () => ({
-    dbContext: await dbContextFactory.getDbContext()
-  })
+  context: async () => {
+    var dbContext = await dbContextFactory.getDbContext();
+    return {
+      userService: new UserService(dbContext),
+      technologyService: new TechnologyService(dbContext),
+    };
+  },
 });
 
 console.log(`Server ready at: ${url}`);
