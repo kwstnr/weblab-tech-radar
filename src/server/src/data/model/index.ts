@@ -4,3 +4,4 @@ export * from './technology-circle.enum';
 export * from './technology-status.enum';
 export * from './technology.type';
 export * from './user.type';
+export * from './auth-information.type';

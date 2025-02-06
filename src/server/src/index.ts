@@ -24,6 +24,13 @@ if (!testPassword) {
   process.exit(1);
 }
 
+const jwtSecret = process.env.JWT_SECRET;
+
+if (!jwtSecret) {
+  console.error('No jwt Secret set in environment variables');
+  process.exit(1);
+}
+
 
 const dbContextFactory = new DbContextFactory(connectionString, testPassword);
 
@@ -34,11 +41,19 @@ const server = new ApolloServer({
 
 const { url } = await startStandaloneServer(server, {
   listen: { port: 4000 },
-  context: async () => {
-    var dbContext = await dbContextFactory.getDbContext();
+  context: async ({ req }) => {
+    const dbContext = await dbContextFactory.getDbContext();
+    const userService = new UserService(dbContext, jwtSecret);
+
+    let authInformation = undefined;
+    if (req.headers.authorization) {
+      authInformation = await userService.getAuthInformationByJwtToken(req.headers.authorization.replace('Bearer ', ''));
+    }
+
     return {
-      userService: new UserService(dbContext),
+      userService,
       technologyService: new TechnologyService(dbContext),
+      authInformation: authInformation,
     };
   },
 });

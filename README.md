@@ -20,10 +20,11 @@ from the root of the repository both of these commands:
 
 ## Start server
 The server also needs a set of environment variables.
-Create a .env file in the `src/server` repository and add the db connection string, i.e.
+Create a .env file in the `src/server` repository and add the db connection string, test user password and jwt secret, i.e.
 ```
 DATABASE_URI=mongodb://root:password@localhost:27017/tech-radar
 TEST_PASSWORD=TEST_123
+JWT_SECRET=jwt_secret
 ```
 
 from the root of the repository run:
