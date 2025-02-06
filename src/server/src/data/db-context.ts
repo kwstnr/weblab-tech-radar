@@ -27,11 +27,20 @@ export class DbContext {
   }
 
   async getTechnologies(): Promise<ITechnology[]> {
+    if (!this.technologies) {
+      console.error('Technology model is not initialized.');
+    }
+  
     const technologies = await this.technologies?.find();
     return technologies ?? [];
   }
 
   async getTechnologyById(id: string): Promise<ITechnology | null | undefined> {
+    if (!this.technologies) {
+      console.error('Technology model is not initialized.');
+      return null;
+    }
+
     return await this.technologies?.findOne({ _id: id });
   }
 
