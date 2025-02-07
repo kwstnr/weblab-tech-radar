@@ -35,16 +35,16 @@ export const typeDefs = `#graphql
   }
 
   input LoginInput {
-    email: String
-    password: String
+    email: String!
+    password: String!
   }
 
   input CreateTechnologyInput {
-    name: String
-    description: String
-    category: String
+    name: String!
+    description: String!
+    category: String!
     circle: String
     circleDescription: String
-    status: String
+    status: String!
   }
 `;

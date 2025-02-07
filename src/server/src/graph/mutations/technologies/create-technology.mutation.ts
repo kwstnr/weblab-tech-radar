@@ -1,6 +1,6 @@
 import { GraphQLError } from 'graphql';
 
-import { Technology, AuthInformation, Role } from '../../../data/model';
+import { Technology, TechnologyStatus, AuthInformation, Role } from '../../../data/model';
 import { TechnologyService } from '../../../data/service';
 import { CreateTechnologyInput } from '../inputs/create-technology.input';
 
@@ -24,6 +24,15 @@ export async function createTechnology(_: any,
     throw new GraphQLError("Unauthorized access denied.", {
       extensions: {
         code: 'NOT_AUTHORIZED'
+      }
+    })
+  }
+
+  if (input.status == TechnologyStatus.PUBLISHED &&
+      (!input.circle || !input.circleDescription)) {
+    throw new GraphQLError('Invalid input. Circle and CircleDescription must be set for published Technologies.', {
+      extensions: {
+        code: 'INVALID_INPUT',
       }
     })
   }
