@@ -8,6 +8,7 @@ export const typeDefs = `#graphql
   type Mutation {
     createTechnology(input: CreateTechnologyInput): Technology
     login(input: LoginInput): LoginOutput
+    editTechnology(input: EditTechnologyInput): Technology
   }
 
   type Technology {
@@ -46,6 +47,16 @@ export const typeDefs = `#graphql
     circle: TechnologyCircle
     circleDescription: String
     status: TechnologyStatus!
+  }
+
+  input EditTechnologyInput {
+    id: String!
+    name: String
+    description: String
+    category: TechnologyCategory
+    circle: TechnologyCircle
+    circleDescription: String
+    status: TechnologyStatus
   }
 
   enum TechnologyStatus {
