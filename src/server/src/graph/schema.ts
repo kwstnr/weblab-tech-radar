@@ -2,6 +2,7 @@ export const typeDefs = `#graphql
   type Query {
     technologies: [Technology]
     technologyById(id: String): Technology
+    me: User
   }
 
   type Mutation {
@@ -25,6 +26,12 @@ export const typeDefs = `#graphql
   type LoginOutput {
     successful: Boolean
     jwtToken: String
+  }
+
+  type User {
+    name: String
+    email: String
+    role: String
   }
 
   input LoginInput {
