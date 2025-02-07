@@ -5,3 +5,4 @@ export * from './technology-status.enum';
 export * from './technology.type';
 export * from './user.type';
 export * from './auth-information.type';
+export * from './login-log.type';

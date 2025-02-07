@@ -3,13 +3,19 @@ import { v4 as uuidv4 } from 'uuid';
 import { genSaltSync, hashSync } from 'bcrypt-ts';
 
 import { users } from '../seed';
-import { User, Technology } from '../model';
-import { UserSchema, TechnologySchema } from '../schema';
+import { User, Technology, LoginLog } from '../model';
+import { 
+  UserSchema,
+  TechnologySchema,
+  LoginLogSchema,
+} from '../schema';
 
 export class DbContext {
   private _technologies?: Model<Technology>;
 
   private _users?: Model<User>;
+
+  private _loginLogs?: Model<LoginLog>;
 
   constructor(private connectionString: string, private testPassword: string) {}
 
@@ -69,11 +75,20 @@ export class DbContext {
     return this._users;
   }
 
+  loginLogs(): Model<LoginLog> | undefined {
+    if (!this._loginLogs) {
+      console.error('LoginLogs model is not initialized.');
+      return undefined;
+    }
+    return this._loginLogs;
+  }
+
   async init(): Promise<void> {
     await this.connectToDatabase();
 
     this._technologies = mongoose.model<Technology>('Technology', TechnologySchema);
     this._users = mongoose.model<User>('User', UserSchema);
+    this._loginLogs = mongoose.model<LoginLog>('LoginLog', LoginLogSchema);
 
     await this.seedTestUsers();
   }
