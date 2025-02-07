@@ -14,10 +14,10 @@ export const typeDefs = `#graphql
     id: String
     name: String
     description: String
-    category: String
-    circle: String
+    category: TechnologyCategory
+    circle: TechnologyCircle
     circleDescription: String
-    status: String
+    status: TechnologyStatus
     created: String
     published: String
     changed: String
@@ -31,7 +31,7 @@ export const typeDefs = `#graphql
   type User {
     name: String
     email: String
-    role: String
+    role: Role
   }
 
   input LoginInput {
@@ -42,9 +42,34 @@ export const typeDefs = `#graphql
   input CreateTechnologyInput {
     name: String!
     description: String!
-    category: String!
-    circle: String
+    category: TechnologyCategory!
+    circle: TechnologyCircle
     circleDescription: String
-    status: String!
+    status: TechnologyStatus!
+  }
+
+  enum TechnologyStatus {
+    DRAFTED
+    PUBLISHED
+  }
+
+  enum TechnologyCircle {
+    ASSESS
+    TRIAL
+    ADOPT
+    HOLD
+  }
+
+  enum TechnologyCategory {
+    TECHNIQUES
+    TOOLS
+    PLATFORMS
+    LANGUAGES
+    FRAMEWORKS
+  }
+
+  enum Role {
+    EMPLOYEE
+    ADMIN
   }
 `;
