@@ -9,6 +9,7 @@ export const typeDefs = `#graphql
     createTechnology(input: CreateTechnologyInput): Technology
     login(input: LoginInput): LoginOutput
     editTechnology(input: EditTechnologyInput): Technology
+    deleteTechnology(input: DeleteTechnologyInput): DeleteResponse
   }
 
   type Technology {
@@ -33,6 +34,14 @@ export const typeDefs = `#graphql
     name: String
     email: String
     role: Role
+  }
+
+  type DeleteResponse {
+    successful: Boolean
+  }
+
+  input DeleteTechnologyInput {
+    id: String!
   }
 
   input LoginInput {

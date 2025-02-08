@@ -90,6 +90,22 @@ export class TechnologyService {
     }
   }
 
+  async deleteTechnology(id: string): Promise<boolean> {
+    const technologies = this.context.technologies();
+
+    if (!technologies) {
+      return false;
+    }
+
+    try {
+      const deleteResult = await technologies.deleteOne({ _id: id });
+      return deleteResult.deletedCount === 1;
+    } catch (error) {
+      console.error('Error deleting technology: ', error);
+      return false
+    }
+  }
+
   private canTechnologyBePublished(existingTechnology: Technology, editTechnologyInput: EditTechnologyInput): boolean {
     var updatedTechnologyCircleAndStatus = {
       ...{
