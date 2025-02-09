@@ -52,4 +52,14 @@ export class TechRadarComponent {
       }
     ]
   };
+
+  private navigateToCategory(category: string): void {
+    this.router.navigate(['/category', category]);
+  }
+
+  chartClick(event: any) {
+    if (event.data.name) {
+      this.navigateToCategory(event.data.name);
+    }
+  }
 }

@@ -5,6 +5,6 @@
   <div class="p-6">
     <h1 class="text-2x1 font-bold mb-4">Tech Radar</h1>
     <h2 class="text-2x1 font bold mb-4">Click on any category to see its technologies</h2>
-    <div echarts [options]="chartOptions" class="h-[1000px] w-full"></div>
+    <div echarts [options]="chartOptions" (chartClick)="chartClick($event)" class="h-[1000px] w-full"></div>
   </div>
 </div>

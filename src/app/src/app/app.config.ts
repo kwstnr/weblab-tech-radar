@@ -1,6 +1,5 @@
 import { ApplicationConfig, provideZoneChangeDetection, inject } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { Router } from '@angular/router';
+import { provideRouter, Router, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
@@ -12,7 +11,7 @@ import { setContext } from '@apollo/client/link/context';
 import { InMemoryCache } from '@apollo/client/core';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideHttpClient(), provideApollo(() => {
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes, withComponentInputBinding()), provideHttpClient(), provideApollo(() => {
       const httpLink = inject(HttpLink);
       const router = inject(Router);
 
