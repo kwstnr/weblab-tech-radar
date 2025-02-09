@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 
+import { HeaderComponent } from '../shared/header/header.component';
+
 @Component({
   selector: 'app-tech-radar',
-  imports: [],
+  imports: [HeaderComponent],
   templateUrl: './tech-radar.component.html',
   styleUrl: './tech-radar.component.scss'
 })
