@@ -3,11 +3,12 @@ import { Component, OnInit, inject } from '@angular/core';
 import { first } from 'rxjs/operators';
 
 import { HeaderComponent } from '../shared/header/header.component';
+import { LogoutComponent } from '../shared/logout/logout.component';
 import { TechnologiesService } from '../services/technologies/technologies.service';
 
 @Component({
   selector: 'app-tech-radar',
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, LogoutComponent],
   templateUrl: './tech-radar.component.html',
   styleUrl: './tech-radar.component.scss'
 })
