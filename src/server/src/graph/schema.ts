@@ -1,6 +1,6 @@
 export const typeDefs = `#graphql
   type Query {
-    technologies: [Technology]
+    technologies(category: TechnologyCategory): [Technology]
     technologyById(id: String): Technology
     me: User
   }
