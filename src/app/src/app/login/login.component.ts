@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../services/auth/auth.service';
@@ -16,19 +17,27 @@ import { HeaderComponent } from '../shared/header/header.component';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
+  private readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
+
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
-    this.loginForm = this.fb.group({
+  constructor(fb: FormBuilder) {
+    this.loginForm = fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
-    if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/tech-radar'])
-    }
+    this.authService.getMe().pipe(
+      first(),
+      tap((user) => {
+        if (user) {
+          this.router.navigate(['/tech-radar'])
+        }
+      })
+    )
   }
 
   async onSubmit() {

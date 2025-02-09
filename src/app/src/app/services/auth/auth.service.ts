@@ -1,20 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { first, tap, map } from 'rxjs/operators';
 
 import { LoginMutation } from '../../graph/mutations/login.mutation';
+import { MeQuery } from '../../graph/queries/me.query';
+import { User } from '../../types/user.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private readonly loginMutation: LoginMutation) { }
-
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('jwtToken');
-  }
+  private readonly loginMutation = inject(LoginMutation);
+  private readonly meQuery = inject(MeQuery);
 
   login(email: string, password: string): Observable<boolean> {
     return this.loginMutation
@@ -34,5 +33,9 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('jwtToken');
+  }
+
+  getMe(): Observable<User> {
+    return this.meQuery.watch().valueChanges.pipe(map(({ data }) => data.me));
   }
 }
