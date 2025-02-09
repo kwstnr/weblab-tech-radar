@@ -1,0 +1,7 @@
+export enum TechnologyCategory {
+  TECHNIQUES = "TECHNIQUES",
+  TOOLS = "TOOLS",
+  PLATFORMS = "PLATFORMS",
+  LANGUAGES = "LANGUAGES",
+  FRAMEWORKS = "FRAMEWORKS"
+}
