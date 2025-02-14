@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { TechnologiesQuery, TechnologiesQueryResult } from '../../graph/queries/technologies.query';
 import { TechnologiesOfCategoryQuery, TechnologiesOfCategoryQueryResult } from '../../graph/queries/technologies-of-category.query';
 import { TechnologyQuery } from '../../graph/queries/technology.query';
+import { DeleteTechnologyMutation } from '../../graph/mutations/delete-technology.mutation';
 import { TechnologyCategory } from '../../types/technology-category.enum';
 import { Technology } from '../../types/technology.type';
 
@@ -16,6 +17,7 @@ export class TechnologiesService {
   private readonly technologiesQuery = inject(TechnologiesQuery);
   private readonly technologiesOfCategoryQuery = inject(TechnologiesOfCategoryQuery);
   private readonly technologyQuery = inject(TechnologyQuery);
+  private readonly deleteTechnologyMutation = inject(DeleteTechnologyMutation);
 
   getTechnologies(): Observable<TechnologiesQueryResult[]> {
     return this.technologiesQuery.watch().valueChanges.pipe(
@@ -33,5 +35,11 @@ export class TechnologiesService {
     return this.technologyQuery.watch({id}).valueChanges.pipe(
       map(({ data }) => data.technologyById)
     );
+  }
+
+  deleteTechnology(id: string): Observable<boolean> {
+    return this.deleteTechnologyMutation
+      .mutate({ input: { id } })
+      .pipe(map(({ data }) => !!data?.deleteTechnology.successful))
   }
 }

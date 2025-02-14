@@ -2,7 +2,7 @@ import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, switchMap, first } from 'rxjs/operators';
 
 import { Technology } from '../types/technology.type';
 import { TechnologiesService } from '../services/technologies/technologies.service';
@@ -26,4 +26,8 @@ export class TechnologyComponent {
   }
 
   technology$: Observable<Technology> = this.technologyId$.pipe(switchMap((id) => this.technologiesService.getTechnology(id)));
+
+  deleteTechnology(id: string): void {
+    this.technologiesService.deleteTechnology(id).pipe(first()).subscribe();
+  }
 }
