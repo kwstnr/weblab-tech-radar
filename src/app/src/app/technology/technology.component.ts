@@ -25,6 +25,8 @@ export class TechnologyComponent {
     }
   }
 
+  @Input() isAdmin?: boolean;
+
   technology$: Observable<Technology> = this.technologyId$.pipe(switchMap((id) => this.technologiesService.getTechnology(id)));
 
   deleteTechnology(id: string): void {

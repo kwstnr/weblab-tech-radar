@@ -45,7 +45,23 @@ export const appConfig: ApplicationConfig = {
 
       return {
         link,
-        cache: new InMemoryCache(),
+        cache: new InMemoryCache({
+          typePolicies: {
+            User: {
+              fields: {
+                name: {
+                  merge: () => undefined,
+                },
+                email: {
+                  merge: () => undefined,
+                },
+                role: {
+                  merge: () => undefined,
+                },
+              }
+            }
+          }
+        }),
       };
     })]
 };

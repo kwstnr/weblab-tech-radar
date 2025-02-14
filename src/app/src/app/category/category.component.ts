@@ -40,9 +40,9 @@ export class CategoryComponent {
       this._categorySubject.next(value);
     }
 
-    isAdmin$ = this.authService.getMe().pipe(map(user => user.role === Role.ADMIN));
+    private readonly isAdmin$ = this.authService.getMe().pipe(map(user => user.role === Role.ADMIN));
 
-    technologies$?: Observable<{[circle: string]: TechnologiesOfCategoryQueryResult[], drafted: TechnologiesOfCategoryQueryResult[] }> = this.category$.pipe(
+    private readonly technologies$: Observable<{[circle: string]: TechnologiesOfCategoryQueryResult[], drafted: TechnologiesOfCategoryQueryResult[] }> = this.category$.pipe(
       switchMap((category) => this.technologiesService.getTechnologiesOfCategory(this.castToTechnologyCategory(category))),
       map((technologies) => technologies.reduce((acc, technology: TechnologiesOfCategoryQueryResult) => ({
         ...acc,
@@ -55,6 +55,10 @@ export class CategoryComponent {
         [TechnologyCircle.HOLD]: [],
         drafted: [],
       } as { [circle: string]: TechnologiesOfCategoryQueryResult[], drafted: TechnologiesOfCategoryQueryResult[] }))
+    );
+
+    data$: Observable<{ isAdmin: boolean, technologies: { [circle: string]: TechnologiesOfCategoryQueryResult[], drafted: TechnologiesOfCategoryQueryResult[] } }> = this.technologies$.pipe(
+      switchMap(technologies => this.isAdmin$.pipe(map(isAdmin => ({ isAdmin, technologies }))))
     );
 
     private castToTechnologyCategory(value: string): TechnologyCategory {
