@@ -1,4 +1,68 @@
 <app-header>
-  <app-logout/>
+  <app-logout></app-logout>
 </app-header>
-<h1>{{ category }}</h1>
+
+<div class="container mx-auto px-4">
+  <div *ngIf="category$ | async as category" class="text-center my-8">
+    <h1 class="text-4xl font-bold">{{ category }}</h1>
+  </div>
+
+  <div *ngIf="technologies$ | async as technologies">
+    <h2 class="text-2xl font-semibold mb-4">Hold</h2>
+
+    <div *ngIf="technologies['HOLD'].length <= 0">
+      <p>No Technologies</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div *ngFor="let technology of technologies['HOLD']">
+        <app-technology [technologyId]="technology.id"></app-technology>
+      </div>
+    </div>
+
+    <h2 class="text-2xl font-semibold mb-4">Assess</h2>
+
+    <div *ngIf="technologies['ASSESS'].length <= 0">
+      <p>No Technologies</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div *ngFor="let technology of technologies['ASSESS']">
+        <app-technology [technologyId]="technology.id"></app-technology>
+      </div>
+    </div>
+
+    <h2 class="text-2xl font-semibold mb-4">Trial</h2>
+
+    <div *ngIf="technologies['TRIAL'].length <= 0">
+      <p>No Technologies</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div *ngFor="let technology of technologies['TRIAL']">
+        <app-technology [technologyId]="technology.id"></app-technology>
+      </div>
+    </div>
+
+    <h2 class="text-2xl font-semibold mb-4">Adopt</h2>
+
+    <div *ngIf="technologies['ADOPT'].length <= 0">
+      <p>No Technologies</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div *ngFor="let technology of technologies['ADOPT']">
+        <app-technology [technologyId]="technology.id"></app-technology>
+      </div>
+    </div>
+
+    <div *ngIf="isAdmin$ | async">
+      <h2 class="text-2xl font-semibold mb-4">Drafted</h2>
+
+    <div *ngIf="technologies['drafted'].length <= 0">
+      <p>No Technologies</p>
+    </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div *ngFor="let technology of technologies['drafted']">
+          <app-technology [technologyId]="technology.id"></app-technology>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

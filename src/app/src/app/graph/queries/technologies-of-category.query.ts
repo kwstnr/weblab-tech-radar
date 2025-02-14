@@ -1,11 +1,12 @@
 import { Query } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 
-import { Technology } from '../../types/technology.type';
 import { TechnologyCategory } from '../../types/technology-category.enum';
+import { TechnologyCircle } from '../../types/technology-circle.enum';
+import { TechnologyStatus } from '../../types/technology-status.enum';
 import { TECHNOLOGIES_OF_CATEGORY } from '../documents/technologies-of-category.graphql';
 
-export type TechnologiesOfCategoryQueryResult = Omit<Technology, 'description' | 'circleDescription' | 'category' | 'created' | 'published' | 'changed'>;
+export type TechnologiesOfCategoryQueryResult = { id: string, circle: TechnologyCircle, status: TechnologyStatus }
 
 @Injectable({
   providedIn: 'root'
