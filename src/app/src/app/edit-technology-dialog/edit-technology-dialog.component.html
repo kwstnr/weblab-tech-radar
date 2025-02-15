@@ -1,0 +1,46 @@
+<div class="p-8 bg-white rounded-lg shadow-lg w-96">
+  <h2 class="text-xl font-bold mb-4">{{ isEditMode ? 'Edit Technology' : 'Create Technology' }}</h2>
+
+  <form [formGroup]="technologyForm" (ngSubmit)="save()">
+    <div class="mb-4">
+      <label class="block text-sm font-medium">Name</label>
+      <input type="text" formControlName="name" class="w-full p-2 border rounded-md" />
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-medium">Description</label>
+      <input type="text" formControlName="description" class="w-full p-2 border rounded-md" />
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-medium">Category</label>
+      <select formControlName="category" class="w-full p-2 border rounded-md">
+        <option *ngFor="let category of technologyCategories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-medium">Circle</label>
+      <select formControlName="circle" class="w-full p-2 border rounded-md">
+        <option *ngFor="let circle of technologyCircles" [value]="circle">{{ circle }}</option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-medium">Circle Description</label>
+      <input type="text" formControlName="circleDescription" class="w-full p-2 border rounded-md" />
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-medium">Status</label>
+      <select formControlName="status" class="w-full p-2 border rounded-md">
+        <option *ngFor="let status of technologyStatuses" [value]="status">{{ status }}</option>
+      </select>
+    </div>
+
+    <div class="flex justify-end mt-4">
+      <button type="button" (click)="close()" class="px-4 py-2 bg-gray-300 rounded-md mr-2">Cancel</button>
+      <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Save</button>
+    </div>
+  </form>
+</div>

@@ -9,6 +9,7 @@ import { HttpLink } from 'apollo-angular/http';
 import { onError } from '@apollo/client/link/error';
 import { setContext } from '@apollo/client/link/context';
 import { InMemoryCache } from '@apollo/client/core';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes, withComponentInputBinding()), provideHttpClient(), provideApollo(() => {
@@ -63,5 +64,5 @@ export const appConfig: ApplicationConfig = {
           }
         }),
       };
-    })]
+    }), provideAnimationsAsync()]
 };
