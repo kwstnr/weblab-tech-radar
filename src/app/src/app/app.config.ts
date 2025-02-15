@@ -10,15 +10,19 @@ import { onError } from '@apollo/client/link/error';
 import { setContext } from '@apollo/client/link/context';
 import { InMemoryCache } from '@apollo/client/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes, withComponentInputBinding()), provideHttpClient(), provideApollo(() => {
       const httpLink = inject(HttpLink);
       const router = inject(Router);
+      const snackbar = inject(MatSnackBar);
 
       const errorLink = onError(({ graphQLErrors }) => {
         if (graphQLErrors?.find(err => err.extensions?.['code'] === 'ANONYMOUS_ACCESS')) {
           router.navigate(['/']);
+        } else {
+          graphQLErrors?.forEach(error => snackbar.open(error.message, '', { duration: 5000 }))
         }
       });
       const graphqlLink = httpLink.create({
