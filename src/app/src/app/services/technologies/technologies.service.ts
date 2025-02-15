@@ -7,6 +7,7 @@ import { TechnologiesOfCategoryQuery, TechnologiesOfCategoryQueryResult } from '
 import { TechnologyQuery } from '../../graph/queries/technology.query';
 import { DeleteTechnologyMutation } from '../../graph/mutations/delete-technology.mutation';
 import { EditTechnologyMutation, EditTechnologyInput } from '../../graph/mutations/edit-technology.mutation';
+import { CreateTechnologyMutation, CreateTechnologyInput } from '../../graph/mutations/create-technology.mutation';
 
 import { TechnologyCategory } from '../../types/technology-category.enum';
 import { Technology } from '../../types/technology.type';
@@ -21,6 +22,7 @@ export class TechnologiesService {
   private readonly technologyQuery = inject(TechnologyQuery);
   private readonly deleteTechnologyMutation = inject(DeleteTechnologyMutation);
   private readonly editTechnologyMutation = inject(EditTechnologyMutation);
+  private readonly createTechnologyMutation = inject(CreateTechnologyMutation);
 
   getTechnologies(): Observable<TechnologiesQueryResult[]> {
     return this.technologiesQuery.watch().valueChanges.pipe(
@@ -52,5 +54,13 @@ export class TechnologiesService {
       refetchQueries: ['TechnologiesOfCategory']
     })
     .pipe(map(({ data }) => data?.editTechnology));
+  }
+
+  createTechnology(createTechnologyInput: CreateTechnologyInput): Observable<Technology | undefined> {
+    return this.createTechnologyMutation
+      .mutate({ input: createTechnologyInput }, {
+        refetchQueries: ['TechnologiesOfCategory']
+      })
+      .pipe(map(({ data }) => data?.createTechnology));
   }
 }

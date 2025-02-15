@@ -35,7 +35,7 @@ export class EditTechnologyDialogComponent {
     name: [this.data.technology?.name || '', Validators.required],
     description: [this.data.technology?.description || '', Validators.required],
     category: [this.data.technology?.category || this.data.currentCategory, Validators.required],
-    circle: [this.data.technology?.circle || ''],
+    circle: [this.data.technology?.circle],
     circleDescription: [this.data.technology?.circleDescription || ''],
     status: [this.data.technology?.status || TechnologyStatus.DRAFTED, Validators.required],
   })
@@ -51,9 +51,11 @@ export class EditTechnologyDialogComponent {
         tap(() => this.dialogRef.close(true))
       ).subscribe();
     } else {
-      console.log('create new technology');
-      console.log('technologyData: ', technologyData);
-      this.dialogRef.close(true);
+      const { id: _, ...createTechnologyInput } = technologyData;
+      this.technologiesService.createTechnology(createTechnologyInput).pipe(
+        first(),
+        tap(() => this.dialogRef.close(true))
+      ).subscribe();
     }
   }
 
