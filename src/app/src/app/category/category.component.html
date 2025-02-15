@@ -1,5 +1,13 @@
 <app-header>
-  <app-logout></app-logout>
+  <div class="flex gap-4 items-center">
+    <button *ngIf="isAdmin$ | async"
+      (click)="addTechnology()"
+      class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center">
+      <span class="text-xl">+</span>
+    </button>
+
+    <app-logout></app-logout>
+  </div>
 </app-header>
 
 <div class="container mx-auto px-4">
