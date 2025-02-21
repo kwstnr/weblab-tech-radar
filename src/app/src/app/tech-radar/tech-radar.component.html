@@ -5,6 +5,21 @@
   <div class="p-6">
     <h1 class="text-2x1 font-bold mb-4">Tech Radar</h1>
     <h2 class="text-2x1 font bold mb-4">Click on any category to see its technologies</h2>
-    <div echarts [options]="chartOptions" (chartClick)="chartClick($event)" class="h-[1000px] w-full"></div>
+
+    <div *ngIf="!(isMobile$ | async); else mobile">
+      <div echarts [options]="chartOptions" (chartClick)="chartClick($event)" class="h-[1000px] w-full"></div>
+    </div>
+
+    <ng-template #mobile>
+      <div class="grid gap-4">
+        <div
+          *ngFor="let category of ['Techniques', 'Tools', 'Platforms', 'Languages', 'Frameworks']"
+          (click)="navigateToCategory(category)"
+          class="cursor-pointer p-4 bg-gray-200 rounded-lg text-center font-semibold text-lg shadow-md hover:bg-gray-300 transition"
+        >
+          {{ category }}
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>

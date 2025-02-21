@@ -1,7 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import * as echarts from 'echarts/core';
 import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
@@ -26,7 +29,13 @@ export class TechRadarComponent {
 
   private readonly router = inject(Router);
 
+  private readonly breakpointObserver = inject(BreakpointObserver);
+
   me$ = this.authService.getMe();
+
+  isMobile$: Observable<boolean> = this.breakpointObserver
+    .observe([Breakpoints.Handset])
+    .pipe(map(result => result.matches));
 
   chartOptions = {
     color: ['#dedede', '#d4d4d4', '#e6e6e6'],
@@ -53,7 +62,7 @@ export class TechRadarComponent {
     ]
   };
 
-  private navigateToCategory(category: string): void {
+  navigateToCategory(category: string): void {
     this.router.navigate(['/category', category]);
   }
 
