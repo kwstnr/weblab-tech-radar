@@ -9,6 +9,8 @@ Das System besteht aus zwei Kernkomponenten:
 - **Technologie-Radar-Administration** für CTOs und Tech-Leads zur Verwaltung von Technologien.
 - **Technologie-Radar-Viewer** für Mitarbeiter zur Einsicht in die Technologien.
 
+Detaillierte Anforderungen können [hier](https://github.com/web-programming-lab/web-programming-lab-projekt/blob/main/Technologie-Radar.md#anforderungen) nachgelesen werden.
+
 ### 1.2 Qualitätsziele
 
 | Ziel | Beschreibung |
@@ -16,7 +18,6 @@ Das System besteht aus zwei Kernkomponenten:
 | Usability | Die Anwendung soll eine intuitive Bedienbarkeit haben. |
 | Performance | Der Technologie-Radar-Viewer soll in unter 1 Sekunde geladen sein. |
 | Sicherheit | Nur autorisierte Benutzer dürfen Technologien verwalten. |
-| Skalierbarkeit | Das System soll für mehrere Unternehmen mandantenfähig sein. |
 
 ### 1.3 Stakeholder
 
@@ -49,13 +50,26 @@ Der Technologie-Radar ermöglicht es Unternehmen, technologische Entscheidungen 
 - **MongoDB** speichert Technologien als flexible Dokumente.
 - **JWT-basierte Authentifizierung** für gesicherte API-Zugriffe.
 
+### 4.1 Qualitätszielabdeckung
+
+| Ziel | Lösungsstrategie |
+| ---- | ---------------- |
+| Usability | Responsives Styling mittels Flexbox und Angular Breakpoint-Observern. |
+| Performance | GraphQL API für flexible Abfragen. |
+| Sicherheit | Authentifizierung und Authorisierung mittels JWT-Tokens. |
+
+
 ## 5. Bausteinsicht
 ### 5.1 Systemübersicht
+
+![Systemdiagramm](./images/system-overview.png)
+
 Das System besteht aus den folgenden Hauptkomponenten:
 - **Frontend (Angular) mit TailwindCSS** zur Darstellung der UI.
 - **Backend (Node.js mit GraphQL)** zur Datenverarbeitung.
 - **Datenbank (MongoDB)** zur Speicherung der Technologien.
-- **Authentifizierungs-Service** zur Benutzerverwaltung.
+
+Die Akteure "Administrator" und "Mitarbeiter" können über die Web-App den Tech-Radar betrachten.
 
 ## 6. Laufzeitsicht
 ### 6.1 Anmeldung und Zugriff auf Technologien

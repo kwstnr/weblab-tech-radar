@@ -1,0 +1,19 @@
+@startuml
+title Technologie-Radar Systemübersicht
+
+actor Administrator
+actor Mitarbeiter
+
+rectangle "Technologie-Radar System" {
+    rectangle "Angular Web-App" as WebApp
+    rectangle "GraphQL API" as API
+    database "MongoDB Datenbank" as DB
+}
+
+Administrator --> WebApp : Verwalten von Technologien
+Mitarbeiter --> WebApp : Anzeigen von Technologien
+
+WebApp --> API : Stellt Anfragen
+API --> DB : Speichert und liest Daten
+
+@enduml
