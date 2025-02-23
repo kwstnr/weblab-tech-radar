@@ -71,6 +71,34 @@ Das System besteht aus den folgenden Hauptkomponenten:
 
 Die Akteure "Administrator" und "Mitarbeiter" können über die Web-App den Tech-Radar betrachten.
 
+### 5.2 Level 2
+#### 5.2.1 Angular Web-App
+
+![Komponentendiagramm Angular Web-App](./images/web-app-component-diagram.png)
+
+Die Angular Web-App besteht aus einem kleinen Set von Angular Komponenten.
+Diese Komponente sind für die Darstellung der verschiedenen Pages zuständig.
+Mithilfe der zwei Services `AuthService` und `TechnologiesService` kommunizieren diese mit der GraphQL API.
+
+Die Komponente `AppComponent` dient als Einstiegspunkt in die Applikation. Sie stellt den Router-Outlet dar und Routed gemäss der URL auf die verschiedenen Komponenten.
+
+Es wird immer zuerst auf die Komponente `LoginComponent` gerouted, diese versucht den eingeloggten User über den `Me`-Node der GraphQL API und einen im localStorage gespeicherten JWT-Token aufzulösen. Falls dies nicht gelingt, kann davon ausgegangen werden, dass der Aufrufende Nutzer nicht eingeloggt ist oder sein Token abgeloffen ist, und er wird auf der Login Komponente aufgefordert, sich anzumelden. Falls der User aufgelöst werden kann, wird der Benutzer auf die Tech-Radar Komponente gerouted.
+
+Die Tech-Radar Komponente dient als Kern der Applikation, Hier wird eine Auswahl der Kategorien der Technologien dargestellt. Aktuell als Kuchendiagramm. Mittels einem Klick auf die Kategorie, wird der Benutzer auf die `CategoryComponent` Komponente weitergeleitet.
+
+Die `CategoryComponent` Komponente zeigt alle Technologien der entsprechenden Kategorie an. Die Technologien werden von der `TechnologyComponent` Komponente im Detail dargestellt. Auf dieser Übersicht können Technologien erstellt, entfernt oder verändert werden.
+
+Die `TechnologyComponent` Komponente stellt die Technologie im Detail an. Falls der angemeldete Benutzer über die Rolle `Admin` verfügt, kann die Komponente eine Technologie löschen oder diese über einen Aufruf der `EditTechnologyDialogComponent` Komponente in einem Dialog bearbeiten.
+
+Die `EditTechnologyDialogComponent` Komponente wird stets als Dialog aufgerufen. Über sie können bestehende Technologien bearbeitet werden oder neue Technologien erzeugt werden.
+
+#### 5.2.2 GraphQL API
+*Komponentendiagramm der API*
+
+#### 5.2.3 Datenbank
+*Datenmodell der Datenbank*
+
+
 ## 6. Laufzeitsicht
 ### 6.1 Anmeldung und Zugriff auf Technologien
 1. Nutzer meldet sich mit E-Mail und Passwort an.

@@ -1,0 +1,43 @@
+@startuml
+allowmixing
+
+title Angular Web-App Komponentendiagramm
+
+node "Angular Web-App" as App {
+    component "AppComponent"
+    component "TechRadarComponent"
+    component "CategoryComponent"
+    component "TechnologyComponent"
+    component "EditTechnologyDialogComponent"
+    component "LoginComponent"
+}
+
+class App.AuthService {
+  logout(): void
+  getMe(): Observable<User>
+  login(email: string, password: string): Observable<boolean>
+}
+
+class App.TechnologiesService {
+  getTechnologies(): Observable<TechnologiesQueryResult[]>
+  getTechnologiesOfCategory(category: TechnologyCategory): Observable<TechnologiesOfCategoryQueryResult[]>
+  getTechnology(id: string): Observable<Technology>
+  deleteTechnology(id: string): Observable<boolean>
+  editTechnology(editTechnologyInput: EditTechnologyInput): Observable<Technology | undefined>
+  createTechnology(createTechnologyInput: CreateTechnologyInput): Observable<Technology | undefined>
+}
+
+"AppComponent" --> "LoginComponent"
+"AppComponent" --> "TechRadarComponent"
+"LoginComponent" --> "TechRadarComponent"
+"TechRadarComponent" --> "CategoryComponent"
+"CategoryComponent" --> "TechnologyComponent"
+"CategoryComponent" --> "EditTechnologyDialogComponent"
+"TechnologyComponent" --> "EditTechnologyDialogComponent"
+
+"LoginComponent" --> "AuthService"
+"CategoryComponent" --> "TechnologiesService"
+"TechnologyComponent" --> "TechnologiesService"
+"EditTechnologyDialogComponent" --> "TechnologiesService"
+
+@enduml
