@@ -1,6 +1,6 @@
 @startuml
 
-title MessageProducer Class Diagram
+title Tech-Radar Class-Diagram
 
 class Technology {
   + Id: UUID

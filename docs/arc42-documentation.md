@@ -202,9 +202,13 @@ Die Data-Services dienen als Schnittstelle zur Datenbank.
 
 Die JWT-Tokens werden mittels dem User-Service pro Request geprüft und der entsprechende Benutzer aus der Datenkbank gelesen.
 
-#### 5.2.3 Datenbank
-*Datenmodell der Datenbank*
+Wie der Benutzer und die gespeicherten Technologien auf der Datenbank aussehen, kann im folgenden Kapitel nachgelesen werden.
 
+#### 5.2.3 Datenbank
+Als Datenbanktechnologie wird im Rahmen des Tech-Radars MongoDB verwendet. Die Datenbank enthält 3 Tabellen/Dokumente.
+Diese sind im folgenden Klassendiagram ersichtlich, welches gleichzeitig auch die Models, welche in der GraphQL API verwendet werden, darstellt.
+
+![Datenmodell](./images/datamodel.png)
 
 ## 6. Laufzeitsicht
 ### 6.1 Anmeldung und Zugriff auf Technologien
