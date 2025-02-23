@@ -1,0 +1,20 @@
+@startuml
+allowmixing
+
+title GraphQL API Data Services Classdiagram
+
+class TechnologyService {
+  getTechnologies(): Promise<Technology[]>
+  getTechnologyById(id: string): Promise<Technology | undefined>
+  addTechnology(technology: Omit<Technology, 'id'>): Promise<Technology | undefined>
+  updateTechnology(editTechnologyInput: EditTechnologyInput): Promise<Technology | undefined>
+  delete Technology(id: string): Promise<boolean>
+}
+
+class UserService {
+  isValidUserLogin(email: string, password: string): Promise<{ successful: boolean, jwtToken?: string, userId?: string }>
+  getAuthInformationByJwtToken(jwtToken: string): Promise<AuthInformation | undefined>
+  logLogin(userId: string): Promise<void>
+}
+
+@enduml

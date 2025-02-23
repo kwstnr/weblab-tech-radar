@@ -93,7 +93,114 @@ Die `TechnologyComponent` Komponente stellt die Technologie im Detail an. Falls 
 Die `EditTechnologyDialogComponent` Komponente wird stets als Dialog aufgerufen. Über sie können bestehende Technologien bearbeitet werden oder neue Technologien erzeugt werden.
 
 #### 5.2.2 GraphQL API
-*Komponentendiagramm der API*
+Die GraphQL API ist grundsätzlich ein Node.js Apollo GraphQL Server.
+Das GraphQL Schema sieht wie folgt aus
+```graphql
+type Query {
+  technologies(category: TechnologyCategory): [Technology]
+  technologyById(id: String): Technology
+  me: User
+}
+
+type Mutation {
+  createTechnology(input: CreateTechnologyInput): Technology
+  login(input: LoginInput): LoginOutput
+  editTechnology(input: EditTechnologyInput): Technology
+  deleteTechnology(input: DeleteTechnologyInput): DeleteResponse
+}
+
+type Technology {
+  id: String
+  name: String
+  description: String
+  category: TechnologyCategory
+  circle: TechnologyCircle
+  circleDescription: String
+  status: TechnologyStatus
+  created: String
+  published: String
+  changed: String
+}
+
+type LoginOutput {
+  successful: Boolean
+  jwtToken: String
+}
+
+type User {
+  name: String
+  email: String
+  role: Role
+}
+
+type DeleteResponse {
+  successful: Boolean
+}
+
+input DeleteTechnologyInput {
+  id: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input CreateTechnologyInput {
+  name: String!
+  description: String!
+  category: TechnologyCategory!
+  circle: TechnologyCircle
+  circleDescription: String
+  status: TechnologyStatus!
+}
+
+input EditTechnologyInput {
+  id: String!
+  name: String
+  description: String
+  category: TechnologyCategory
+  circle: TechnologyCircle
+  circleDescription: String
+  status: TechnologyStatus
+}
+
+enum TechnologyStatus {
+  DRAFTED
+  PUBLISHED
+}
+
+enum TechnologyCircle {
+  ASSESS
+  TRIAL
+  ADOPT
+  HOLD
+}
+
+enum TechnologyCategory {
+  TECHNIQUES
+  TOOLS
+  PLATFORMS
+  LANGUAGES
+  FRAMEWORKS
+}
+
+enum Role {
+  EMPLOYEE
+  ADMIN
+}
+```
+
+Die Queries und Mutations werden als Resolver-Funktionen registriert. Diese Funktionen können über das Context-Objekt von Apollo Server die Authentifikations-Informationen des aufrufenden Benutzers abrufen und auf die Data-Services zugreifen.
+
+Da Node.js oder Apollo-GraphQL über keinen Dependency-Injection-Container verfügt, kann dieses Context-Objekt an seiner Stelle verwendet werden. Die Authentifikations-Informationen werden pro Request aufgelöst. Ebenso werden die Data-Services pro Request instanziert. Hierbei könnte man den Ressourcenverbrauch noch optimieren, indem man Factory-Funktionen in den Context "injected" und diese Factory-Funktionen von den Resolver-Funktionen verwendet werden, um eine Instanz eines Services bei Bedarf zu erzeugen.
+
+Die Data-Services greifen auf die Datenbank zu und sehen wie folgt aus:
+![GraphQL API Klassendiagram](./images/api-class-diagram.png)
+
+Die Data-Services dienen als Schnittstelle zur Datenbank.
+
+Die JWT-Tokens werden mittels dem User-Service pro Request geprüft und der entsprechende Benutzer aus der Datenkbank gelesen.
 
 #### 5.2.3 Datenbank
 *Datenmodell der Datenbank*
@@ -102,6 +209,7 @@ Die `EditTechnologyDialogComponent` Komponente wird stets als Dialog aufgerufen.
 ## 6. Laufzeitsicht
 ### 6.1 Anmeldung und Zugriff auf Technologien
 1. Nutzer meldet sich mit E-Mail und Passwort an.
+*TODO: Hier Authentifizierung beschreiben mit Salt etc.*
 2. JWT-Token wird vom Backend generiert und an den Client gesendet.
 3. Nutzer kann Technologien anzeigen und verwalten (je nach Berechtigung).
 
