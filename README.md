@@ -1,7 +1,7 @@
 # weblab-tech-radar
 Tech Radar HSLU-WEBLAB Project
 
-# Local Devleopment
+# Local Development
 ## Setup Environment Variables
 create a `.env`-file in the root directory of the repository.
 add variables to the `.env` file for the database credentials, i.e.:
@@ -33,3 +33,12 @@ from the root of the repository run:
 ## Start app
 from the root of the repository run:
 `cd src/app && ng serve`
+
+## Login
+Two users are seeded using the provided `TEST_PASSWORD` in the environment variables. Developers can use these logins to work with the tech-radar.
+The two users have the following credentials and roles.
+
+| Rolle | Email | Password |
+| ----- | ----- | -------- |
+| ADMINISTRATOR | administrator@company.com | value of `TEST_PASSWORD` |
+| EMPLOYEE | mitarbeiter@company.com | value of `TEST_PASSWORD` |
