@@ -21,6 +21,7 @@ class User {
   + Email: String
   + Password: String <hashed>
   + Role: Role
+  + Salt: String
 }
 
 class AdminLoginLogs {
