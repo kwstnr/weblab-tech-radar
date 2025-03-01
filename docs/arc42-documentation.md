@@ -253,7 +253,7 @@ Diese sind im folgenden Klassendiagram ersichtlich, welches gleichzeitig auch di
 10. Angular SPA aktualisiert den GraphQL Cache mit dem aktualisierten Technologie-Objekt mittels der Refetch-Query `technologies`.
 
 ## 7. Verteilungssicht
-- **Hosting in der Cloud**.
+- **Hosting in der Cloud** vorgesehen.
 - **Datenbank und API sind getrennte Services**.
 - **Frontend wird als statische SPA ausgeliefert**.
 
@@ -276,14 +276,12 @@ Diese sind im folgenden Klassendiagram ersichtlich, welches gleichzeitig auch di
 - **Sicherheit:** Geschützte API-Zugriffe
 - **Usability:** Einfache UI für Administratoren und Nutzer
 
-### 10.2 Qualitätsszenarien
-- Ein CTO kann in unter 5 Sekunden eine neue Technologie erfassen.
-- Ein Mitarbeiter kann in unter 1 Sekunde eine Technologie einsehen.
-
 ## 11. Risiken und technische Schulden
 - **GraphQL Security:** Absicherung gegen übermässige Abfragen.
 - **Skalierbarkeit:** MongoDB-Cluster notwendig bei grosser Last.
 - **Fehlende Multi-Tenant-Funktionalität:** Noch nicht umgesetzt.
+- **Technologien nicht im Home-Screen angezeigt:** Die Idee wäre es gewesen, ECharts zu nutzen, um ein Kuchendiagramm der Technologien darzustellen und die Technologien als zweite Chart darüberzulegen und ihre Position mittels der zugewiesenen Kategorie zu ermitteln, damit diese am richtigen Ort angezeigt werden. Wurde noch nicht umgesetzt aufgrund von Zeitmangel.
+- **Technologie-Entwürfe ohne zugewiesene Kategorie nicht sichtbar:** Dies würde sich erübrigen, sobald alle Technologien im Home-Screen angezeigt werden können.
 
 ## 12. Glossar
 
@@ -293,4 +291,5 @@ Diese sind im folgenden Klassendiagram ersichtlich, welches gleichzeitig auch di
 | CTO | Chief Technology Officer - Verantwortlich für Technologie-Strategie. |
 | GraphQL | API-Technologie für flexible Abfragen. |
 | JWT | JSON Web Token - Authentifizierungsmechanismus. |
+| SPA | Single Page Appliaction |
 
